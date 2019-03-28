@@ -145,8 +145,5 @@ def test_change_regression(chain, json_data, regtest):
     txs = [chain.tx_with_hash(json_data[identifier]) for identifier in identifiers]
     for h in heuristics:
         for tx in txs:
-            r1 = h(tx)
-            print([x.index for x in r1 if r1], file=regtest)
-            r2 = h.unique_change(tx)
-            v = [r2.index] if r2 else []
-            print(v, file=regtest)
+            print(h(tx).index.tolist(), file=regtest)
+            print(h.unique_change(tx).index.tolist(), file=regtest)
